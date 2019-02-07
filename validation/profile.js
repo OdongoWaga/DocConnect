@@ -30,11 +30,7 @@ module.exports = function validateProfileInput(data) {
     }
   }
 
-  if (!isEmpty(data.youtube)) {
-    if (!Validator.isURL(data.youtube)) {
-      errors.youtube = 'Not a valid URL';
-    }
-  }
+  
 
   if (!isEmpty(data.twitter)) {
     if (!Validator.isURL(data.twitter)) {
