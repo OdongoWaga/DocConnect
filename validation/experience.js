@@ -5,23 +5,21 @@ module.exports = function validateExperienceInput(data) {
   let errors = {};
 
   data.title = !isEmpty(data.title) ? data.title : '';
-  data.clinic = !isEmpty(data.clinic) ? data.clinic : '';
+  data.company = !isEmpty(data.company) ? data.company : '';
   data.from = !isEmpty(data.from) ? data.from : '';
+  
+  
 
+
+  
   if (Validator.isEmpty(data.title)) {
-    errors.title = 'Job title field is required';
+    errors.title = 'Job Title field is required';
   }
 
-  if (Validator.isEmpty(data.clinic)) {
-    errors.clinic = 'Clinic field is required';
-  }
-
-  if (Validator.isEmpty(data.from)) {
-    errors.from = 'From date field is required';
-  }
-
+  
   return {
     errors,
     isValid: isEmpty(errors)
   };
 };
+ 
