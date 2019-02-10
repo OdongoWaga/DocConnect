@@ -12,7 +12,7 @@ const ProfileSchema = new Schema({
     required: true,
     max: 40
   },
-  company: {
+  clinic: {
     type: String
   },
   website: {
@@ -41,7 +41,7 @@ const ProfileSchema = new Schema({
         type: String,
         required: true
       },
-      company: {
+      clinic: {
         type: String,
         required: true
       },
