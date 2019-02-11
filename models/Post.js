@@ -14,102 +14,46 @@ const PostSchema = new Schema({
   name: {
     type: String
   },
-  website: {
+  avatar: {
     type: String
   },
-  location: {
-    type: String
-  },
-  status: {
-    type: String,
-    required: true
-  },
-  skills: {
-    type: [String],
-    required: true
-  },
-  bio: {
-    type: String
-  },
-  
-  experience: [
+  likes: [
     {
-      title: {
-        type: String,
-        required: true
-      },
-      clinic:{
-        type: String,
-        required: true
-      },
-      location: {
-        type: String
-      },
-      from: {
-        type: Date,
-        required: true
-      },
-      to: {
-        type: Date
-      },
-      current: {
-        type: Boolean,
-        default: false
-      },
-      description: {
-        type: String
-      }
+        user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+            
+        }
     }
-  ],
-  education: [
+],
+  comments: [
     {
-      school: {
-        type: String,
-        required: true
-      },
-      qualification: {
-        type: String,
-        required: true
-      },
-      fieldofstudy: {
-        type: String,
-        required: true
-      },
-      from: {
-        type: Date,
-        required: true
-      },
-      to: {
-        type: Date
-      },
-      current: {
-        type: Boolean,
-        default: false
-      },
-      description: {
-        type: String
-      }
+        user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'  
+        },
+        text: {
+            type: String,
+            required: true
+        },
+        name: {
+            type: String
+          },
+          avatar: {
+            type: String
+          },
+          date: {
+              type: Date,
+              default: Date.now
+          }
     }
-  ],
-  social: {
-    
-    twitter: {
-      type: String
-    },
-    facebook: {
-      type: String
-    },
-    linkedin: {
-      type: String
-    },
-    instagram: {
-      type: String
-    }
-  },
-  date: {
+],
+date: {
     type: Date,
     default: Date.now
-  }
+}
 });
+ 
 
-module.exports = Profile = mongoose.model('profile', ProfileSchema);
+
+module.exports = Post = mongoose.model('post', PostSchema);
