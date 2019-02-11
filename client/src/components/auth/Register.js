@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'; 
+import classnames from 'classnames'
 
  class Register extends Component {
 
@@ -14,7 +15,7 @@ import axios from 'axios';
     onChange =(e)=>{
         this.setState({[e.target.name]: e.target.value}); 
     }
-    onSubmit =(e)=>{
+    onSubmit =(e)=>{ 
         e.preventDefault();
         const newUser ={
             name: this.state.name,
@@ -24,10 +25,13 @@ import axios from 'axios';
         }
         axios.post('/api/users/register', newUser)
         .then(res => console.log(res.data))
-        .catch(err=> console.log(err.response.data))
+        .catch(err=> this.setState({errors: err.response.data}));
     }
 
   render() {
+
+    const {errors}= this.state;
+
     return (
         <div className="register">
         <div className="container">
@@ -37,10 +41,15 @@ import axios from 'axios';
               <p className="lead text-center">Create your Clinical account</p>
               <form onSubmit={this.onSubmit} >
                 <div className="form-group">
-                  <input type="text" className="form-control form-control-lg" placeholder="Name" name="name"
+                  <input type="text" 
+                  className={classnames('form-control form-control-lg', {
+                    'is-invalid':errors.name
+                  })}
                   value={this.state.name}
                   onChange={this.onChange}
                    />
+
+              {errors.name && (<div className ="invalid-feedback"></div>)}
                 </div>
                 <div className="form-group">
                   <input type="email" className="form-control form-control-lg" placeholder="Email Address" name="email"
