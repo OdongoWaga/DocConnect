@@ -32,16 +32,14 @@ const ProfileSchema = new Schema({
   bio: {
     type: String
   },
-  githubusername: {
-    type: String
-  },
+  
   experience: [
     {
       title: {
         type: String,
         required: true
       },
-      clinic: {
+      clinic:{
         type: String,
         required: true
       },
@@ -70,7 +68,7 @@ const ProfileSchema = new Schema({
         type: String,
         required: true
       },
-      degree: {
+      qualification: {
         type: String,
         required: true
       },
