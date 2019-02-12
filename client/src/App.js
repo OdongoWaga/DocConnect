@@ -16,6 +16,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './utils/PrivateRoute';
+import CreateProfile from './components/create profile/CreateProfile';
 
  if(localStorage.jwtToken){
    //Set auth token header auth
@@ -58,9 +59,11 @@ class App extends Component {
       <div className="container">
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
-      <Switch>
-        
+      <Switch>        
       <PrivateRoute exact path="/dashboard" component={Dashboard} />
+      </Switch>
+      <Switch>        
+      <PrivateRoute exact path="/create-profile" component={CreateProfile} />
       </Switch>
       </div>
       <Footer/>
