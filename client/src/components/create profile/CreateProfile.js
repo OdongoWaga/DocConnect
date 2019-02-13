@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import TextFieldGroup from '../../utils/textFieldGroup';
 import SelectListGroup from '../../utils/selectListGroup';
 import TextAreaFieldGroup from '../../utils/textAreaFieldGroup';
+import InputGroup from '../../utils/inputGroup';
 
 class CreateProfile extends Component {
     state ={
@@ -33,7 +34,48 @@ class CreateProfile extends Component {
   }
     
     render() {
-        const {errors} =this.state;
+        const {errors, displaySocialInputs} =this.state;
+
+        let socialInputs;
+
+        if(displaySocialInputs){
+          socialInputs =(
+            <div>
+            <InputGroup
+            placeholder="Twitter profile link"
+            name="twitter"
+            icon="fab fa-twitter"
+            value={this.state.twitter}
+            onChange={this.onChange}
+            error={errors.twitter}
+            />
+            <InputGroup
+            placeholder="Facebook profile link"
+            name="facebook"
+            icon="fab fa-facebook"
+            value={this.state.facebook}
+            onChange={this.onChange}
+            error={errors.facebook}
+            />
+            <InputGroup
+            placeholder="Linkedin profile link"
+            name="linkedin"
+            icon="fab fa-linkedin"
+            value={this.state.linkedin}
+            onChange={this.onChange}
+            error={errors.linkedin}
+            />
+            <InputGroup
+            placeholder="Instagram profile link"
+            name="instagram"
+            icon="fab fa-instagram"
+            value={this.state.instagram}
+            onChange={this.onChange}
+            error={errors.instagram}
+            />
+            </div>
+          )
+        }
 
      //Select options for status
      
@@ -119,17 +161,26 @@ class CreateProfile extends Component {
        info="use comma seperated values (eg surgery, nutrition, epidemiology)"
       />
       <TextAreaFieldGroup
-       placeholder="Skills"
-       name="skills"
-       value={this.state.skills}
+       placeholder="Short Bio"
+       name="bio"
+       value={this.state.bio}
        onChange={this.onChange} 
-       error={errors.skills}
-       info="use comma seperated values (eg surgery, nutrition, epidemiology"
+       error={errors.bio}
+       info="Say Something about yourself"
       />
 
         <div className="mb-3">
-        <button className="btn btn-light"> </button>
+        <button onClick={()=> {
+          this.setState(prevState => ({
+            displaySocialInputs: !prevState.displaySocialInputs
+          }))
+        }} className="btn btn-light"> 
+        Add Social Network Links
+        </button>
+        <span className ="text-muted">Optional </span>
         </div>
+        {socialInputs}
+        <input type="submit" value= "Submit" className="btn btn-info btn-block mt-4" />
       </form>
       </div>
       </div>
