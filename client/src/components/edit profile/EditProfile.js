@@ -6,6 +6,8 @@ import TextAreaFieldGroup from '../../utils/textAreaFieldGroup';
 import InputGroup from '../../utils/inputGroup';
 import {createProfile, getCurrentProfile} from '../../actions/profileActions'; 
 import {withRouter} from 'react-router-dom';
+import isEmpty from '../../validation/is-empty'
+
 
 class CreateProfile extends Component {
     state ={
@@ -33,6 +35,44 @@ this.props.getCurrentProfile()
 componentWillReceiveProps(nextProps) {
   if(nextProps.errors) {
     this.setState({errors: nextProps.errors});
+  }
+  if(nextProps.profile.profile) {
+      const profile= nextProps.profile.profile
+       // Skills array back to comma seperated values
+       
+       const skillsCSV = profile.skills.join(',');
+
+       //if profile field does not exist make empty string 
+       profile.clinic = !isEmpty(profile.clinic) ? profile.clinic : '';
+       profile.website = !isEmpty(profile.website) ? profile.website : '';
+       profile.location = !isEmpty(profile.location) ? profile.location : '';
+       profile.bio = !isEmpty(profile.bio) ? profile.bio : '';
+
+       profile.social =!isEmpty(profile.social) ? profile.social: {};
+
+       profile.twitter = isEmpty(profile.social.twitter) ? profile.social.twitter : '';
+
+       profile.facebook = isEmpty(profile.social.facebook) ? profile.social.facebook: '';
+
+       profile.linkedin = isEmpty(profile.social.linkedin) ? profile.social.linkedin : '';
+
+       profile.instagram = isEmpty(profile.social.instagram) ? profile.social.instagram : '';
+
+    //set component fields state
+
+      this.setState({
+        handle:profile.handle, 
+        clinic:profile.clinic, 
+        website:profile.website, 
+        location:profile.location, 
+        status:profile.status, 
+        skills:skillsCSV, 
+        bio:profile.bio, 
+        twitter:profile.twitter, 
+        facebook:profile.facebook, 
+        linkedin:profile.linkedin, 
+        instagram:profile.instagram, 
+      })
   }
 }
 
