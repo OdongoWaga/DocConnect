@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import TextFieldGroup from '../../utils/textFieldGroup';
 
 import {addEducation} from '../../actions/profileActions';
+import TextAreaFieldGroup from '../../utils/textAreaFieldGroup';
 
  class AddEducation  extends Component {
   state= {
@@ -19,7 +20,7 @@ import {addEducation} from '../../actions/profileActions';
        
   }
 
-componentWillReceiveProps(nextProps) {
+componentWillReceiveProps=(nextProps)=> {
     if(nextProps.errors) {
         this.setState({errors: nextProps.errors })
     }
@@ -57,30 +58,37 @@ componentWillReceiveProps(nextProps) {
         const {errors} = this.state; 
 
     return (
-      <div className='add-experience'>
+      <div className='add-education'>
       <div className='container'>
       <div className='row'>
       <div className='col-md-8 m-auto'>
-      <Link to='/dashbaord' className='btn btn-light'>
+      <Link to='/dashboard' className='btn btn-light'>
       Go Back
       </Link>
-      <h1 className='display-4 text-center'>Add Experience </h1>
-        <p className='lead text-center'> Add past jobs or current one </p>
+      <h1 className='display-4 text-center'>Add Education </h1>
+        <p className='lead text-center'> Add medical schools or institutions you have attended </p>
         <small className='d-block pb-3'> * =required </small>
         <form onSubmit ={this.onSubmit}>
         <TextFieldGroup 
-       placeholder="*clinic or Hospital"
-       name="clinic"
-       value={this.state.clinic}
+       placeholder="* School"
+       name="school"
+       value={this.state.school}
        onChange={this.onChange} 
-       error={errors.clinic}
+       error={errors.school}
       />
         <TextFieldGroup 
-       placeholder="*Job title"
-       name="title"
-       value={this.state.title}
+       placeholder="* fieldofstudy"
+       name="fieldofstudy"
+       value={this.state.fieldofstudy}
        onChange={this.onChange} 
-       error={errors.title}
+       error={errors.fieldofstudy}
+      />
+        <TextFieldGroup 
+       placeholder="* qualification"
+       name="qualification"
+       value={this.state.qualification}
+       onChange={this.onChange} 
+       error={errors.qualification}
       />
         <TextFieldGroup 
        placeholder="location"
@@ -117,11 +125,11 @@ componentWillReceiveProps(nextProps) {
       id='current'
       />
       <label htmlFor='current' className='form-check-label'>
-      Current Job
+      Currently Studying
       </label>
       </div>
-      <TextFieldGroup 
-       placeholder="Job Description"
+      <TextAreaFieldGroup
+       placeholder="Qualification Description"
        name="description"
        value={this.state.description}
        onChange={this.onChange} 
@@ -142,7 +150,6 @@ componentWillReceiveProps(nextProps) {
 
 const mapStateToProps = state => ({
     profile:state.profile,
-    auth: state.auth,
     errors:state.errors
 });
 
