@@ -3,20 +3,21 @@ import {GET_PROFILE, PROFILE_LOADING,GET_ERRORS,  CLEAR_CURRENT_PROFILE, SET_CUR
 
 //Get current Profile
 export const getCurrentProfile = () => dispatch => {
-    dispatch(setProfileLoading());
-    axios.get('/api/profile')
-    .then(res => 
-        dispatch({
-            type: GET_PROFILE,
-            payload: res.data
-        })
-        )
-        .catch(err => 
-            dispatch({
-                type:GET_PROFILE,
-                payload: {}
-            }));
-
+  dispatch(setProfileLoading());
+  axios
+    .get('/api/profile')
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: {}
+      })
+    );
 };
 
  //Create Profile

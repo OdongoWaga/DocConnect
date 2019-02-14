@@ -20,7 +20,6 @@ class CreateProfile extends Component {
         twitter: '',
         facebook:'',
         linkedin:'',
-        youtube:'',
         instagram:'',
         errors:{}
     }
