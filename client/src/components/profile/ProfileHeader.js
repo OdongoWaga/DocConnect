@@ -37,7 +37,7 @@ class ProfileHeader extends Component {
                     <i className="fas fa-globe fa-2x" />
                   </a>
                 )}
-                // Remember Social Media is on an object so we first check on social website
+                {/* Remember Social Media is on an object so we first check on social website*/}
                 {isEmpty(profile.social && profile.social.twitter) ? null : (
                   <a
                     className="text-white p-2"
