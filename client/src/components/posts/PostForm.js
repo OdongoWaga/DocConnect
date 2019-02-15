@@ -1,14 +1,66 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
+import TextAreaFieldGroup from '../../utils/textAreaFieldGroup';
 
 class PostForm extends Component {
-  render() {
+  state={
+       text: '',
+       errors: {}  
+  }
+
+  onSubmit =(e) => {
+      e.preventDefault();
+
+      const {user}= this.props.auth;
+
+      const newPost ={
+          text:this.state.text,
+          name:user.name,
+          avatar:user.avatar
+      };
+      this.props.addPost(newPost);
+      this.setState({text: ''})
+  }
+
+  onChange=(e) => {
+      this.setState({[e.target.name]:e.target.value});
+  }
+  
+    render() {
+        const {errors}= this.state;
     return (
-      <div>
+      <div className="post-form mb-3">
+      <div className=" card card-info">
+      <div className="card-header bg-info text-white">
+      Say Something
+      </div>
+      <div className="card-body">
+      <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+          <TextAreaFieldGroup
+          name="text" 
+          placeholder="Create a post"
+          value={this.state.next}
+          onChange={this.onChange}
+          error={errors.text}
+          />
+          </div>
+          <button type="submit" className="btn btn-dark">
+          Submit
+          </button>
+      </form>
+      </div>
+
+      </div>
         
       </div>
     )
   }
 }
 
-export default PostForm;
+const mapStateToProps=state =>({
+    auth:state.auth,
+    errors:state.errors
+})
+
+export default connect(mapStateToProps) (PostForm);   
