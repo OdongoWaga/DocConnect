@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import TextAreaFieldGroup from '../../utils/textAreaFieldGroup';
+import {addPost} from '../../actions/postActions';
 
 class PostForm extends Component {
   state={
        text: '',
        errors: {}  
+  } 
+componentWillReceiveProps(newProps) {
+
+  if(newProps.errors) {
+    this.setState({errors: newProps.errors})
   }
+}
+
 
   onSubmit =(e) => {
       e.preventDefault();
@@ -63,4 +71,4 @@ const mapStateToProps=state =>({
     errors:state.errors
 })
 
-export default connect(mapStateToProps) (PostForm);   
+export default connect(mapStateToProps, {addPost}) (PostForm);   
