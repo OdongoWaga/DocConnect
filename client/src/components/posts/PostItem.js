@@ -4,6 +4,13 @@ import classnames from 'classnames';
 import {Link } from 'react-router-dom';
 
 class PostItem extends Component {
+
+    onDeleteClick(id) {
+        this.props.deletePost(id) {
+            this.props.deletePost(id);
+        }
+    }
+
   render() {
       const {post, auth}= this.props;
 
@@ -71,5 +78,5 @@ const mapStateToProps = state => ({
     errors: state.errors
   });
   
-  export default connect(mapStateToProps, { addPost })(PostItem);
+  export default connect(mapStateToProps, {deletePost})(PostItem);
   
